@@ -1,6 +1,19 @@
+function shuffleOptions(question) {
+  const originalIndex = question.answer;
+  const options = [...question.options];
+  for (let i = options.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [options[i], options[j]] = [options[j], options[i]];
+  }
+  const newAnswer = options.findIndex(
+    (opt) => opt === question.options[originalIndex]
+  );
+  return { ...question, options, answer: newAnswer };
+}
+
 export const sections = [
   {
-    title: "Fill-in-the-Blank Questions (1-15)",
+    title: "Fill in the blank",
     questions: [
       {
         id: 1,
@@ -92,10 +105,10 @@ export const sections = [
         options: ["bring", "brings", "brought", "bringing"],
         answer: 0,
       },
-    ],
+    ].map(shuffleOptions),
   },
   {
-    title: "Error Correction (16-25)",
+    title: "Error Correction",
     questions: [
       {
         id: 16,
@@ -207,10 +220,10 @@ export const sections = [
         ],
         answer: 0,
       },
-    ],
+    ].map(shuffleOptions),
   },
   {
-    title: "Sentence Completion (26-35)",
+    title: "Sentence Completion",
     questions: [
       {
         id: 26,
@@ -322,10 +335,10 @@ export const sections = [
         ],
         answer: 0,
       },
-    ],
+    ].map(shuffleOptions),
   },
   {
-    title: "Prepositions (36-40)",
+    title: "Prepositions",
     questions: [
       {
         id: 36,
@@ -357,10 +370,10 @@ export const sections = [
         options: ["for, with", "of, between", "to, among", "in, through"],
         answer: 0,
       },
-    ],
+    ].map(shuffleOptions),
   },
   {
-    title: "Subject-Verb Agreement (41-50)",
+    title: "Subject-Verb Agreement",
     questions: [
       {
         id: 41,
@@ -422,6 +435,6 @@ export const sections = [
         options: ["has", "have", "is", "are"],
         answer: 1,
       },
-    ],
+    ].map(shuffleOptions),
   },
 ];
